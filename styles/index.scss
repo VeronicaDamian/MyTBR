@@ -1,0 +1,173 @@
+@import 'variables';
+@import 'buttons';
+@import 'add_books_styling';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: linear-gradient(rgb(145, 108, 73, 0.8), rgb(145, 108, 73, 0.8)), url('../img/background_Photo.png');
+    color: $text-color;
+    font-family: Arial, sans-serif;
+    color: $text-color;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+  
+#toBeRead {
+  background-color: $card-background;
+
+  width: 80%;
+  max-width: 500px;
+  border-radius: 15px;
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+#headingsAndProgressBar {
+  flex: 1;
+  h1 {
+    font-size: 1.5em;
+    color: $text-color;
+    margin-bottom: 5px;
+  }
+
+  h4 {
+    color: $text-color;
+    font-size: 1em;
+    margin-bottom: 20px;
+  
+  }
+
+  #progressBarEmpty {
+    width: 100%;
+    height: 10px;
+    background-color: lighten($progress-bar-color, 20%);
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 10px 0;
+
+
+    &::after {
+      content: '';
+      display: block;
+      height: 100%;
+      width: 30%; // Example width, can be dynamic
+      border-radius: 5px;
+      background-color: $progress-bar-color;
+      transition: width 0.3s ease;
+  
+    }
+  };
+};
+  
+  #goalNumber {
+    font-size: 1.2em;
+    background-color: darken($card-background, 10%);
+    color: $text-color;
+    border: 1px solid $text-color;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin: 5px 0 0 40px;
+    
+  };
+
+// Currently Reading Section
+
+#currentlyReading {
+  background-color: $card-background;
+  width: 80%;
+  height: 300px;
+  max-width: 800px;
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+
+  h2 {
+    
+    align-self: center;
+    font-size: 1.3em;
+    color: $text-color;
+    margin: 20px;
+    padding-left: 70px;
+  }
+
+
+  #detailsSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  
+    h4 {
+      
+      font-size: 1em;
+      color: $text-color;
+      margin-bottom: 5px;
+      padding: 10px;
+    }
+
+    // Position button at the bottom of detailsSection
+    a {
+      margin-top: auto;
+      align-self: flex-start;
+    }
+  }
+
+  #bookDescription {
+    display: flex;
+    align-self: center;
+    padding: 20px 10px;
+    justify-content: space-between;
+    width: 200px;
+    height: 150px;
+
+
+    p {
+      color: $text-color;
+      font-size: 0.9em;
+    }
+  }
+
+  #bookCoverImage {
+    width: 160px;
+    height: 256px;
+    background-color: darken($card-background, 15%);
+    border: 1px solid $text-color;
+    display: flex;
+    flex-direction: row;
+    align-self: flex-end;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 0.9em;
+    color: $text-color;
+  }
+}
+
+
+
+
+section#addBooks,
+section#myLibrary {
+  width: 80%;
+  max-width: 600px;
+  text-align: center;
+  margin-bottom: 20px;
+};

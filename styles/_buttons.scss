@@ -1,0 +1,37 @@
+#detailsSection{
+    button {
+    background-color: $button-color;
+    color: $button-text-color;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+
+    &:hover {
+      background-color: darken($button-color, 10%);
+      
+    }}
+};
+
+
+section#addBooks,
+section#myLibrary {
+    button {
+    background-color: $card-background;
+    color: $text-color;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 1em;
+    cursor: pointer;
+    border: 1px solid transparent;
+
+    &:hover {
+      background-color: lighten($card-background, 10%);
+      border: 1px solid $text-color;
+    }
+  }
+};
+
+
