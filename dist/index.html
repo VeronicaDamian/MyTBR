@@ -1,46 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyTBR</title>
     <link href="/styles/index.css" rel="stylesheet">
-    <script src="index.js" async defer></script>
 </head>
 
 <body>
-    <section id="toBeRead"> 
+    <section id="toBeRead">
         <div id="headingsAndProgressBar">
             <h1>~To Be Read~</h1>
             <h4>Keep it up!</h4>
-            <div id="progressBarEmpty"></div> <!-- It will fill with color the percent of the progress made through the goal like idk man 10% of progress = 10% filled with color-->
+            <div id="progressBarEmpty"></div>
         </div>
-        <div id="goalNumber"> 0 / 1000</div> 
+        <div id="goalNumber"> 0 / 1000</div>
     </section>
 
     <section id="currentlyReading">
-        <div id="detailsSection"> <!--The details of the book displayed-->
+        <div id="detailsSection">
             <h2>Currently Reading</h2>
             <h4>{Book Title}</h4>
             <h4>{Author}</h4>
             <h4>Page {number} out of {number}</h4>
-            <a href="./pages/edit-book.html">
+            <a href="../pages/edit-book.html">
                 <button>Edit Book</button>
             </a>
-         </div>
+        </div>
 
-         <div id="bookDescription">
-                <p>Book Description</p>
-         </div>
+        <div id="bookDescription">
+            <p>Book Description</p>
+        </div>
 
-        <div id="bookCoverImage"> <!--The section where the book cover is displayed-->
+        <div id="bookCoverImage">
             <h4>{Book Cover}</h4>
         </div>
     </section>
 
     <section id="addBooks">
         <div>
-            <a href="./pages/add-books.html">
+            <a href="../pages/add-books.html">
                 <button>Add Book</button>
             </a>
         </div>
@@ -48,14 +48,12 @@
 
     <section id="myLibrary">
         <div>
-            <a href="./pages/my-library.html">
+            <a href="../pages/my-library.html">
                 <button>My Library</button>
             </a>
         </div>
     </section>
-   
-
-
-
+    <script src="bundle.js"></script>
 </body>
+
 </html>
