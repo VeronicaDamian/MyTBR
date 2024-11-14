@@ -13,6 +13,8 @@ async function getBooks() {
   try {
     const querySnapshot = await getDocs(colRef);
     books = querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+    // Sort books by createdAt timestamp
+    books.sort((a, b) => b.createdAt - a.createdAt);
     console.log(books);
   } catch (error) {
     console.error("Error getting data: ", error);
@@ -28,6 +30,7 @@ async function addBook(title, author, description, image, pages) {
       description: description,
       image: image,
       pages: pages,
+      createdAt: new Date(),
     });
     console.log("Document written with ID: ", docRef.id);
   } catch (error) {
@@ -101,7 +104,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
       await getBooks(); // Ensure getBooks is defined and retrieves the books
       if (books.length > 0) {
-        updateCurrentlyReading(books[books.length - 1]);
+        updateCurrentlyReading(books[0]);
       } else {
         console.error("No books found");
       }
