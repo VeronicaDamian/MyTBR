@@ -43,7 +43,7 @@ function initializeForm() {
     const form = document.getElementById("addingBooksForm");
     if (form) {
       console.log("Form found!");
-      form.addEventListener("submit", (e) => {
+      form.addEventListener("submit", async (e) => {
         e.preventDefault();
         console.log("Form submitted");
 
@@ -61,8 +61,11 @@ function initializeForm() {
           pages,
         });
 
-        addBook(title, author, description, image, pages);
+        await addBook(title, author, description, image, pages);
         console.log("Book added!");
+
+        // Redirect to the main page
+        window.location.href = "/dist/";
       });
     } else {
       console.log("Form not found!");
