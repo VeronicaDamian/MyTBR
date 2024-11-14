@@ -30,13 +30,23 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
+/***/ "./src/config.js":
+/*!***********************!*\
+  !*** ./src/config.js ***!
+  \***********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nconst firebaseConfig = {\n  apiKey: \"AIzaSyCLm4itgfS0SxA-BKoZer2Vd_B40XhlJ1Y\",\n  authDomain: \"my-tbr-339c7.firebaseapp.com\",\n  projectId: \"my-tbr-339c7\",\n  storageBucket: \"my-tbr-339c7.firebasestorage.app\",\n  messagingSenderId: \"486477094343\",\n  appId: \"1:486477094343:web:450dc9abba256f79470de2\",\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (firebaseConfig);\n\n\n//# sourceURL=webpack://mytbr/./src/config.js?");
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {\n__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/app */ \"./node_modules/firebase/app/dist/esm/index.esm.js\");\n/* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/firestore */ \"./node_modules/firebase/firestore/dist/esm/index.esm.js\");\n\n\n\nconst firebaseConfig = {\n  apiKey: \"AIzaSyCLm4itgfS0SxA-BKoZer2Vd_B40XhlJ1Y\",\n  authDomain: \"my-tbr-339c7.firebaseapp.com\",\n  projectId: \"my-tbr-339c7\",\n  storageBucket: \"my-tbr-339c7.firebasestorage.app\",\n  messagingSenderId: \"486477094343\",\n  appId: \"1:486477094343:web:450dc9abba256f79470de2\",\n};\n\nconst app = (0,firebase_app__WEBPACK_IMPORTED_MODULE_0__.initializeApp)(firebaseConfig);\nconst db = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(app);\n\nconst querySnapshot = await (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getDocs)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)(db, \"books\"));\n\nfunction getBooks() {\n  querySnapshot.forEach((doc) => {\n    console.log(`${doc.id} => ${doc.data()}`);\n  });\n}\n\nasync function addBook(title, author, description, image, pages) {\n  try {\n    const docRef = await (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.addDoc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)(db, \"books\"), {\n      title: title,\n      author: author,\n      description: description,\n      image: image,\n      pages: pages,\n    });\n    console.log(\"Document written with ID: \", docRef.id);\n  } catch (error) {\n    console.error(\"Error adding document: \", error);\n  }\n}\n\n__webpack_async_result__();\n} catch(e) { __webpack_async_result__(e); } }, 1);\n\n//# sourceURL=webpack://mytbr/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/app */ \"./node_modules/firebase/app/dist/esm/index.esm.js\");\n/* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/firestore */ \"./node_modules/firebase/firestore/dist/esm/index.esm.js\");\n/* harmony import */ var _config_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./config.js */ \"./src/config.js\");\n\n\n\n\n// Initialize Firebase\nconst app = (0,firebase_app__WEBPACK_IMPORTED_MODULE_0__.initializeApp)(_config_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"]);\nconst db = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(app);\nconst colRef = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)(db, \"books\");\nlet books = [];\n\n// Function to get books from Firestore\nasync function getBooks() {\n  try {\n    const querySnapshot = await (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getDocs)(colRef);\n    books = querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));\n    // Sort books by createdAt timestamp\n    books.sort((a, b) => b.createdAt - a.createdAt);\n    console.log(books);\n  } catch (error) {\n    console.error(\"Error getting data: \", error);\n  }\n}\n\n// Function to add a book to Firestore\nasync function addBook(title, author, description, image, pages) {\n  try {\n    const docRef = await (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.addDoc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)(db, \"books\"), {\n      title: title,\n      author: author,\n      description: description,\n      image: image,\n      pages: pages,\n      createdAt: new Date(),\n    });\n    console.log(\"Document written with ID: \", docRef.id);\n  } catch (error) {\n    console.error(\"Error adding document: \", error);\n  }\n}\n\nfunction initializeForm() {\n  document.addEventListener(\"DOMContentLoaded\", () => {\n    const form = document.getElementById(\"addingBooksForm\");\n    if (form) {\n      console.log(\"Form found!\");\n      form.addEventListener(\"submit\", (e) => {\n        e.preventDefault();\n        console.log(\"Form submitted\");\n\n        const title = document.getElementById(\"title\").value;\n        const author = document.getElementById(\"author\").value;\n        const description = document.getElementById(\"description\").value;\n        const image = document.getElementById(\"image\").value;\n        const pages = document.getElementById(\"pages\").value;\n\n        console.log(\"Form values:\", {\n          title,\n          author,\n          description,\n          image,\n          pages,\n        });\n\n        addBook(title, author, description, image, pages);\n        console.log(\"Book added!\");\n      });\n    } else {\n      console.log(\"Form not found!\");\n    }\n  });\n}\n\ndocument.addEventListener(\"DOMContentLoaded\", async () => {\n  if (window.location.pathname === \"/dist/\") {\n    const currentlyReadingSection = document.getElementById(\"currentlyReading\");\n\n    // Function to update the \"Currently Reading\" section\n    function updateCurrentlyReading(book) {\n      const detailsSection = document.getElementById(\"detailsSection\");\n      const bookDescription = document.getElementById(\"bookDescription\");\n      const bookCoverImage = document.getElementById(\"bookCoverImage\");\n\n      if (detailsSection && bookDescription && bookCoverImage) {\n        detailsSection.innerHTML = `\n          <h2>Currently Reading</h2>\n          <h4>${book.title}</h4>\n          <h4>${book.author}</h4>\n          <h4>Page ${book.currentPage} out of ${book.pages}</h4>\n          <a href=\"../pages/edit-book.html\">\n            <button>Edit Book</button>\n          </a>\n        `;\n\n        bookDescription.innerHTML = `<p>${book.description}</p>`;\n        bookCoverImage.innerHTML = `<img src=\"${book.image}\" alt=\"${book.title} cover\" />`;\n      } else {\n        console.error(\n          \"One or more elements for 'Currently Reading' section not found\"\n        );\n      }\n    }\n\n    // Retrieve books from Firestore and update the \"Currently Reading\" section\n    try {\n      await getBooks(); // Ensure getBooks is defined and retrieves the books\n      if (books.length > 0) {\n        updateCurrentlyReading(books[0]);\n      } else {\n        console.error(\"No books found\");\n      }\n    } catch (error) {\n      console.error(\"Error retrieving books: \", error);\n    }\n  }\n\n  if (window.location.pathname.includes(\"my-library.html\")) {\n    const bookCardsSection = document.getElementById(\"bookCards\");\n\n    // Function to create a book card\n    function createBookCard(book) {\n      const card = document.createElement(\"div\");\n      card.className = \"book-card\";\n      card.innerHTML = `\n        <h3>${book.title}</h3>\n        <p><strong>Author:</strong> ${book.author}</p>\n        <p><strong>Description:</strong> ${book.description}</p>\n        <p><strong>Pages:</strong> ${book.pages}</p>\n        <img src=\"${book.image}\" alt=\"${book.title} cover\" />\n      `;\n      return card;\n    }\n\n    // Retrieve books from Firestore and display them\n    try {\n      await getBooks(); // Ensure getBooks is defined and retrieves the books\n      if (bookCardsSection) {\n        books.forEach((book) => {\n          const bookCard = createBookCard(book);\n          bookCardsSection.appendChild(bookCard);\n        });\n      } else {\n        console.error(\"bookCardsSection element not found\");\n      }\n    } catch (error) {\n      console.error(\"Error retrieving books: \", error);\n    }\n  }\n});\n\ninitializeForm();\n\n\n//# sourceURL=webpack://mytbr/./src/index.js?");
 
 /***/ }),
 
@@ -157,75 +167,6 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 	}
 /******/ 	
 /************************************************************************/
-/******/ 	/* webpack/runtime/async module */
-/******/ 	(() => {
-/******/ 		var webpackQueues = typeof Symbol === "function" ? Symbol("webpack queues") : "__webpack_queues__";
-/******/ 		var webpackExports = typeof Symbol === "function" ? Symbol("webpack exports") : "__webpack_exports__";
-/******/ 		var webpackError = typeof Symbol === "function" ? Symbol("webpack error") : "__webpack_error__";
-/******/ 		var resolveQueue = (queue) => {
-/******/ 			if(queue && queue.d < 1) {
-/******/ 				queue.d = 1;
-/******/ 				queue.forEach((fn) => (fn.r--));
-/******/ 				queue.forEach((fn) => (fn.r-- ? fn.r++ : fn()));
-/******/ 			}
-/******/ 		}
-/******/ 		var wrapDeps = (deps) => (deps.map((dep) => {
-/******/ 			if(dep !== null && typeof dep === "object") {
-/******/ 				if(dep[webpackQueues]) return dep;
-/******/ 				if(dep.then) {
-/******/ 					var queue = [];
-/******/ 					queue.d = 0;
-/******/ 					dep.then((r) => {
-/******/ 						obj[webpackExports] = r;
-/******/ 						resolveQueue(queue);
-/******/ 					}, (e) => {
-/******/ 						obj[webpackError] = e;
-/******/ 						resolveQueue(queue);
-/******/ 					});
-/******/ 					var obj = {};
-/******/ 					obj[webpackQueues] = (fn) => (fn(queue));
-/******/ 					return obj;
-/******/ 				}
-/******/ 			}
-/******/ 			var ret = {};
-/******/ 			ret[webpackQueues] = x => {};
-/******/ 			ret[webpackExports] = dep;
-/******/ 			return ret;
-/******/ 		}));
-/******/ 		__webpack_require__.a = (module, body, hasAwait) => {
-/******/ 			var queue;
-/******/ 			hasAwait && ((queue = []).d = -1);
-/******/ 			var depQueues = new Set();
-/******/ 			var exports = module.exports;
-/******/ 			var currentDeps;
-/******/ 			var outerResolve;
-/******/ 			var reject;
-/******/ 			var promise = new Promise((resolve, rej) => {
-/******/ 				reject = rej;
-/******/ 				outerResolve = resolve;
-/******/ 			});
-/******/ 			promise[webpackExports] = exports;
-/******/ 			promise[webpackQueues] = (fn) => (queue && fn(queue), depQueues.forEach(fn), promise["catch"](x => {}));
-/******/ 			module.exports = promise;
-/******/ 			body((deps) => {
-/******/ 				currentDeps = wrapDeps(deps);
-/******/ 				var fn;
-/******/ 				var getResult = () => (currentDeps.map((d) => {
-/******/ 					if(d[webpackError]) throw d[webpackError];
-/******/ 					return d[webpackExports];
-/******/ 				}))
-/******/ 				var promise = new Promise((resolve) => {
-/******/ 					fn = () => (resolve(getResult));
-/******/ 					fn.r = 0;
-/******/ 					var fnQueue = (q) => (q !== queue && !depQueues.has(q) && (depQueues.add(q), q && !q.d && (fn.r++, q.push(fn))));
-/******/ 					currentDeps.map((dep) => (dep[webpackQueues](fnQueue)));
-/******/ 				});
-/******/ 				return fn.r ? promise : getResult();
-/******/ 			}, (err) => ((err ? reject(promise[webpackError] = err) : outerResolve(exports)), resolveQueue(queue)));
-/******/ 			queue && queue.d < 0 && (queue.d = 0);
-/******/ 		};
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
